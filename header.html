@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="dark">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" type="imagex-icon" href="https://i.ibb.co/QcNcJny/Ethereum.png">
+    <title>Ethermine</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet"
+    	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+    	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+    	crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/css/bootstrap-slider.css" />
+	  
+	<!----- header -------> 
+	  <script type="text/javascript">
+      function filter(){
+
+        var value, name, item, i;
+
+        value = document.getElementById("value").value.toUpperCase();
+        item = document.getElementsByClassName("item");
+
+        for(i=0;i<item.length;i++){
+          name = item[i].getElementsByClassName("name");
+          if(name[0].innerHTML.toUpperCase().indexOf(value) > -1){
+            item[i].style.display = "flex";
+          }else{
+            item[i].style.display = "none";
+          }
+        }
+      }
+	  </script>  
+	  
+	  <style type="text/css">
+	  	ul {
+    		list-style-type: none;
+	    	margin: 0;
+	    	padding: 0;
+	    	background-color: #333;
+		}
+		ul:after{
+		    content:'';
+		    display: block;
+		    clear:both;
+		}
+		li {
+		    float: left;
+		}
+		li a {
+		    display: block;
+		    color: white;
+		    text-align: center;
+		    padding: 14px 16px;
+		    text-decoration: none;
+		}
+		li a:hover:not(.active) {
+		    background-color: #111;
+		}
+		.active {
+		    background-color: #4CAF50;
+		}		  
+	  </style>	  
+  </head>
+<body>
+	  
+	<ul>
+      <li><a class="active" href="http://ethermine.dothome.co.kr/"> Home </a></li>
+      <li><a href="http://ethermine.dothome.co.kr/calc/calc.html">채산성 계산</a></li>
+      <li><a href="http://ethermine.dothome.co.kr/ethermine.html">잔고조회</a></li>
+    </ul>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="이더리움 레이븐코인 이더리움클래식 채굴 채산성 수익률 계산기 마이닝풀허브 이더마인 나노풀 잔고조회">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>채굴 채산성 및 수익률 계산기 마이닝풀허브 이더마인 나노풀 조회 - miningcalc.kr</title>
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"> -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap-theme.min.css" integrity="sha256-8uHMIn1ru0GS5KO+zf7Zccf8Uw12IA5DrdEcmMuWLFM=" crossorigin="anonymous">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+	<style>
+		body {
+		padding-top: 70px;
+		}
+	</style>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-345697-15"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-345697-15');
+	</script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha512-DUC8yqWf7ez3JD1jszxCWSVB0DMP78eOyBpMa5aJki1bIRARykviOuImIczkxlj1KhVSyS16w2FSQetkD4UU2w==" crossorigin="anonymous"></script> -->
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<style>
+
+	#loading {
+		text-align: center;
+		padding: 0!important;
+	}
+
+	#loading:before {
+		content: '';
+		display: inline-block;
+		height: 100%;
+		vertical-align: middle;
+		margin-right: -4px;
+	}
+
+	/* .modal-dialog {
+		display: inline-block;
+		text-align: left;
+		vertical-align: middle;
+	} */
+
+		#loading > div {
+			width: 18px;
+			height: 18px;
+			background-color: #333;
+
+			border-radius: 100%;
+			display: inline-block;
+			-webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+			animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+			background-color: white;
+		}
+
+		#loading .bounce1 {
+			-webkit-animation-delay: -0.32s;
+			animation-delay: -0.32s;
+		}
+
+		#loading .bounce2 {
+			-webkit-animation-delay: -0.16s;
+			animation-delay: -0.16s;
+		}
+
+		@-webkit-keyframes sk-bouncedelay {
+			0%, 80%, 100% { -webkit-transform: scale(0) }
+			40% { -webkit-transform: scale(1.0) }
+		}
+
+		@keyframes sk-bouncedelay {
+			0%, 80%, 100% { 
+				-webkit-transform: scale(0);
+				transform: scale(0);
+			} 40% { 
+				-webkit-transform: scale(1.0);
+				transform: scale(1.0);
+			}
+		}
+	</style>
+	<script data-ad-client="ca-pub-0030278772418750" async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+	<script>
+		Kakao.init('2151dafb444a1fe2c76d315654c02759');
+		Kakao.isInitialized();
+	</script>
+
+
+  </head>
+  <body>
+
+
+<div id="loading" class="modal fade" tabindex="-1" role="dialog">
+	<div class="bounce1"></div>
+	<div class="bounce2"></div>
+	<div class="bounce3"></div>
+</div><!-- /.modal -->
+
+<script type="text/javascript">
+	// $('#loading').modal('show');
+</script>
+
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/">MiningCalc</a>
+			</div>
+			<div id="navbar" class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li class=""><a href="/notice">공지사항</a></li>
+					<!--
+					<li class="dropdown ">
+						<a href="/calc/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">계산하기<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="/calc/">채산성 계산</a></li>
+							<li><a href="/calc/hashrate/">해시 수익률 계산</a></li>
+							<li><a href="/calc/elec/">전기요금 계산</a></li>
+						</ul>
+					</li>-->
+					<!-- <li><a href="/calc/">이더리움 채산성 계산</a></li> -->
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">채산성 계산 <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="/calc/eth">이더리움(ETH)</a></li>
+							<li><a href="/calc/etc">이더리움 클래식(ETC)</a></li>
+							<li><a href="/calc/rvn">레이븐코인(RVN)</a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href="/miningpoolhub/profitability">마이닝풀허브 채산성 순위 Top 3</a></li>
+							<li><a href="/reward">채굴기 이력 계산</a></li>
+						</ul>
+					</li>
+					
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">마이닝풀허브 조회<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="/miningpoolhub">전체 조회</a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href="/miningpoolhub/eth">이더리움(ETH)</a></li>
+							<li><a href="/miningpoolhub/eth/example">이더리움(예시)</a></li>
+							<li><a href="/miningpoolhub/etc">이더리움 클래식(ETC)</a></li>
+							<li><a href="/miningpoolhub/rvn">레이븐코인(RVN)</a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href="/miningpoolhub/dag">이더리움(ETH) DAG 변경 예상 일정</a></li>
+							<li><a href="/valuation">잔고 가치 변화</a></li>
+
+						</ul>
+					</li>
+
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">이더마인 조회<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="/ethermine">전체 조회</a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href="/ethermine/eth">이더리움(ETH)</a></li>
+							<li><a href="/ethermine/etc">이더리움 클래식(ETC)</a></li>
+							<li><a href="/ethermine/rvn">레이븐코인(RVN)</a></li>
+						</ul>
+					</li>
+
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">나노풀 조회<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="/nanopool">전체 조회</a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href="/nanopool/eth">이더리움(ETH)</a></li>
+							<li><a href="/nanopool/etc">이더리움 클래식(ETC)</a></li>
+							<li><a href="/nanopool/rvn">레이븐코인(RVN)</a></li>
+						</ul>
+					</li>
+
+
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">시세분석<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="/trade/price/upbit">업비트-바이낸스 실시간 김프</a></li>
+							<li><a href="/trade/volume/upbit">업비트 1분 거래량 모니터링</a></li>
+							<li><a href="/cluster/upbitbot">업비트 봇 거래 감시</a></li>
+							<!-- <li><a href="/trade/volume/binance">바이낸스 실시간 급등 모니터링</a></li> -->
+							<li><a href="/trade/volume/binance_us">바이낸스US 실시간 급등 모니터링</a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href="/chart">유사 차트 날짜 분석</a></li>
+							<li><a href="/chart/btc">비트코인(BTC)</a></li>
+							<li><a href="/chart/eth">이더리움(ETH)</a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href="/cluster">장중 시세흐름 군집화 분석</a></li>
+
+						</ul>
+					</li>
+					<li><a href="https://forms.gle/qK9scC5j14vamKKu6" target="_blank"><span class="glyphicon glyphicon-send" aria-hidden="true"></span> 한줄 의견 남기기</a></li>
+
+					<!-- <li><a href="/miningpoolhub/">마이닝풀허브 조회</a></li> -->
+					<!--
+					<li class="dropdown ">
+						<a href="/fun/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">재미로 보는 정보<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="/fun/eth_network_hashrate">이더리움 네트워크 해시</a></li>
+							<li><a href="/fun/popular_gpu">인기있는 그래픽 카드</a></li>
+						</ul>
+					</li>
+					-->
+				</ul>
+			</div><!--/.nav-collapse -->
+		</div>
+	</nav>
+	<div class="container" style="margin-bottom: 30px;">        <div class="alert alert-warning" role="alert">
+                <p>해시 정보가 정확하지 않으면 아래 그래픽 카드 숫자를 활용하세요.</p>
+                <p>GPU 해시값은 대표값으로 셋팅환경과 다를 수 있으니 참고만 하세요.</p>
+        </div>
+
+        <div class="panel panel-primary">
+            <div class="panel-heading"><h4>이더리움 채굴 해시</h4></div>
+            <div class="panel-body text-center">
+                <div class="input-group input-group-lg">
+                    <input type="tel" class="form-control" name="total_hash" id="total_hash" value="0" style="text-align: right;" placeholder="총 보유 해시레이트">
+                    <span class="input-group-addon" id="basic-addon2">Mh/s</span>
+                </div>
+                <button class="btn btn-primary btn-block btn-lg submit" style="margin-top: 30px;">계산하기</button>
+            </div>
+        </div>
+
+        <div class="panel panel-success">
+            <div class="panel-heading">Nvidia <span class="pull-right"><button class="btn btn-success btn-xs" id="reset_nvidia">입력 초기화</button></span> </div>
+            <div class="panel-body">
+                            <div class="col-md-4 col-sm-12" style="margin-bottom: 10px;">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">1060</span>
+                        <input type="tel" hash="22.5" name="1060" value="0" class="form-control gpu nvidia" style="text-align: right;" placeholder="0">
+                        <span class="input-group-addon" id="basic-addon2">장 X 22.5Mh/s</span>
+                    </div>
+                </div>
+                            <div class="col-md-4 col-sm-12" style="margin-bottom: 10px;">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">1070</span>
+                        <input type="tel" hash="26" name="1070" value="0" class="form-control gpu nvidia" style="text-align: right;" placeholder="0">
+                        <span class="input-group-addon" id="basic-addon2">장 X 26Mh/s</span>
+                    </div>
+                </div>
+                            <div class="col-md-4 col-sm-12" style="margin-bottom: 10px;">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">1070Ti</span>
+                        <input type="tel" hash="29" name="1070Ti" value="0" class="form-control gpu nvidia" style="text-align: right;" placeholder="0">
+                        <span class="input-group-addon" id="basic-addon2">장 X 29Mh/s</span>
+                    </div>
+                </div>
+                            <div class="col-md-4 col-sm-12" style="margin-bottom: 10px;">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">1080</span>
+                        <input type="tel" hash="34" name="1080" value="0" class="form-control gpu nvidia" style="text-align: right;" placeholder="0">
+                        <span class="input-group-addon" id="basic-addon2">장 X 34Mh/s</span>
+                    </div>
+                </div>
+                            <div class="col-md-4 col-sm-12" style="margin-bottom: 10px;">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">1080Ti</span>
+                        <input type="tel" hash="41" name="1080Ti" value="0" class="form-control gpu nvidia" style="text-align: right;" placeholder="0">
+                        <span class="input-group-addon" id="basic-addon2">장 X 41Mh/s</span>
+                    </div>
+                </div>
+                            <div class="col-md-4 col-sm-12" style="margin-bottom: 10px;">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">1660</span>
+                        <input type="tel" hash="23" name="1660" value="0" class="form-control gpu nvidia" style="text-align: right;" placeholder="0">
+                        <span class="input-group-addon" id="basic-addon2">장 X 23Mh/s</span>
+                    </div>
+                </div>
+                            <div class="col-md-4 col-sm-12" style="margin-bottom: 10px;">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">1660Ti</span>
+                        <input type="tel" hash="28" name="1660Ti" value="0" class="form-control gpu nvidia" style="text-align: right;" placeholder="0">
+                        <span class="input-group-addon" id="basic-addon2">장 X 28Mh/s</span>
+                    </div>
+                </div>
+                            <div class="col-md-4 col-sm-12" style="margin-bottom: 10px;">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">1660 Super</span>
+                        <input type="tel" hash="29" name="1660 Super" value="0" class="form-control gpu nvidia" style="text-align: right;" placeholder="0">
+                        <span class="input-group-addon" id="basic-addon2">장 X 29Mh/s</span>
+                    </div>
+                </div>
+                            <div class="col-md-4 col-sm-12" style="margin-bottom: 10px;">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">2060</span>
+                        <input type="tel" hash="30" name="2060" value="0" class="form-control gpu nvidia" style="text-align: right;" placeholder="0">
+                        <span class="input-group-addon" id="basic-addon2">장 X 30Mh/s</span>
+                    </div>
+                </div>
+                            <div class="col-md-4 col-sm-12" style="margin-bottom: 10px;">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">2060 Super</span>
+                        <input type="tel" hash="40" name="2060 Super" value="0" class="form-control gpu nvidia" style="text-align: right;" placeholder="0">
+                        <span class="input-group-addon" id="basic-addon2">장 X 40Mh/s</span>
+                    </div>
+                </div>
+                            <div class="col-md-4 col-sm-12" style="margin-bottom: 10px;">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">2070</span>
+                        <input type="tel" hash="40" name="2070" value="0" class="form-control gpu nvidia" style="text-align: right;" placeholder="0">
+                        <span class="input-group-addon" id="basic-addon2">장 X 40Mh/s</span>
+                    </div>
+                </div>
+                            <div class="col-md-4 col-sm-12" style="margin-bottom: 10px;">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">2070 Super</span>
+                        <input type="tel" hash="40" name="2070 Super" value="0" class="form-control gpu nvidia" style="text-align: right;" placeholder="0">
+                        <span class="input-group-addon" id="basic-addon2">장 X 40Mh/s</span>
+                    </div>
+                </div>
+                            <div class="col-md-4 col-sm-12" style="margin-bottom: 10px;">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">2080</span>
+                        <input type="tel" hash="41" name="2080" value="0" class="form-control gpu nvidia" style="text-align: right;" placeholder="0">
+                        <span class="input-group-addon" id="basic-addon2">장 X 41Mh/s</span>
+                    </div>
+                </div>
+                            <div class="col-md-4 col-sm-12" style="margin-bottom: 10px;">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">2080 Super</span>
+                        <input type="tel" hash="41" name="2080 Super" value="0" class="form-control gpu nvidia" style="text-align: right;" placeholder="0">
+                        <span class="input-group-addon" id="basic-addon2">장 X 41Mh/s</span>
+                    </div>
+                </div>
+                            <div class="col-md-4 col-sm-12" style="margin-bottom: 10px;">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">2080Ti</span>
+                        <input type="tel" hash="55.2" name="2080Ti" value="0" class="form-control gpu nvidia" style="text-align: right;" placeholder="0">
+                        <span class="input-group-addon" id="basic-addon2">장 X 55.2Mh/s</span>
+                    </div>
+                </div>
+                            <div class="col-md-4 col-sm-12" style="margin-bottom: 10px;">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">3060</span>
+                        <input type="tel" hash="42" name="3060" value="0" class="form-control gpu nvidia" style="text-align: right;" placeholder="0">
+                        <span class="input-group-addon" id="basic-addon2">장 X 42Mh/s</span>
+                    </div>
+                </div>
+                            <div class="col-md-4 col-sm-12" style="margin-bottom: 10px;">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">3060Ti</span>
+                        <input type="tel" hash="58.1" name="3060Ti" value="0" class="form-control gpu nvidia" style="text-align: right;" placeholder="0">
+                        <span class="input-group-addon" id="basic-addon2">장 X 58.1Mh/s</span>
+                    </div>
+                </div>
+                            <div class="col-md-4 col-sm-12" style="margin-bottom: 10px;">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">3070</span>
+                        <input type="tel" hash="58.1" name="3070" value="0" class="form-control gpu nvidia" style="text-align: right;" placeholder="0">
+                        <span class="input-group-addon" id="basic-addon2">장 X 58.1Mh/s</span>
+                    </div>
+                </div>
+                            <div class="col-md-4 col-sm-12" style="margin-bottom: 10px;">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">3080</span>
+                        <input type="tel" hash="91.5" name="3080" value="0" class="form-control gpu nvidia" style="text-align: right;" placeholder="0">
+                        <span class="input-group-addon" id="basic-addon2">장 X 91.5Mh/s</span>
+                    </div>
+                </div>
+                            <div class="col-md-4 col-sm-12" style="margin-bottom: 10px;">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">3090</span>
+                        <input type="tel" hash="100" name="3090" value="0" class="form-control gpu nvidia" style="text-align: right;" placeholder="0">
+                        <span class="input-group-addon" id="basic-addon2">장 X 100Mh/s</span>
+                    </div>
+                </div>
+                        </div>
+        </div>
+
+        <div class="panel panel-danger">
+            <div class="panel-heading">AMD<span class="pull-right"><button class="btn btn-danger btn-xs" id="reset_amd">입력 초기화</button></span> </div>
+            <div class="panel-body">
+                            <div class="col-md-4 col-sm-12" style="margin-bottom: 10px;">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">5500 XT</span>
+                        <input type="tel" hash="26" name="5500 XT" value="0" class="gpu form-control amd" style="text-align: right;" placeholder="0">
+                        <span class="input-group-addon" id="basic-addon2">장 X 26Mh/s</span>
+                    </div>
+                </div>
+                            <div class="col-md-4 col-sm-12" style="margin-bottom: 10px;">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">480</span>
+                        <input type="tel" hash="29.5" name="480" value="0" class="gpu form-control amd" style="text-align: right;" placeholder="0">
+                        <span class="input-group-addon" id="basic-addon2">장 X 29.5Mh/s</span>
+                    </div>
+                </div>
+                            <div class="col-md-4 col-sm-12" style="margin-bottom: 10px;">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">580</span>
+                        <input type="tel" hash="30.2" name="580" value="0" class="gpu form-control amd" style="text-align: right;" placeholder="0">
+                        <span class="input-group-addon" id="basic-addon2">장 X 30.2Mh/s</span>
+                    </div>
+                </div>
+                            <div class="col-md-4 col-sm-12" style="margin-bottom: 10px;">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">RX 5600 XT</span>
+                        <input type="tel" hash="40.5" name="RX 5600 XT" value="0" class="gpu form-control amd" style="text-align: right;" placeholder="0">
+                        <span class="input-group-addon" id="basic-addon2">장 X 40.5Mh/s</span>
+                    </div>
+                </div>
+                            <div class="col-md-4 col-sm-12" style="margin-bottom: 10px;">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">Vega 56</span>
+                        <input type="tel" hash="45" name="Vega 56" value="0" class="gpu form-control amd" style="text-align: right;" placeholder="0">
+                        <span class="input-group-addon" id="basic-addon2">장 X 45Mh/s</span>
+                    </div>
+                </div>
+                            <div class="col-md-4 col-sm-12" style="margin-bottom: 10px;">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">Vega 64</span>
+                        <input type="tel" hash="46" name="Vega 64" value="0" class="gpu form-control amd" style="text-align: right;" placeholder="0">
+                        <span class="input-group-addon" id="basic-addon2">장 X 46Mh/s</span>
+                    </div>
+                </div>
+                            <div class="col-md-4 col-sm-12" style="margin-bottom: 10px;">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">5700</span>
+                        <input type="tel" hash="55" name="5700" value="0" class="gpu form-control amd" style="text-align: right;" placeholder="0">
+                        <span class="input-group-addon" id="basic-addon2">장 X 55Mh/s</span>
+                    </div>
+                </div>
+                            <div class="col-md-4 col-sm-12" style="margin-bottom: 10px;">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">5700 XT</span>
+                        <input type="tel" hash="55" name="5700 XT" value="0" class="gpu form-control amd" style="text-align: right;" placeholder="0">
+                        <span class="input-group-addon" id="basic-addon2">장 X 55Mh/s</span>
+                    </div>
+                </div>
+                            <div class="col-md-4 col-sm-12" style="margin-bottom: 10px;">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">6800</span>
+                        <input type="tel" hash="60" name="6800" value="0" class="gpu form-control amd" style="text-align: right;" placeholder="0">
+                        <span class="input-group-addon" id="basic-addon2">장 X 60Mh/s</span>
+                    </div>
+                </div>
+                            <div class="col-md-4 col-sm-12" style="margin-bottom: 10px;">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">RX6800 XT</span>
+                        <input type="tel" hash="60" name="RX6800 XT" value="0" class="gpu form-control amd" style="text-align: right;" placeholder="0">
+                        <span class="input-group-addon" id="basic-addon2">장 X 60Mh/s</span>
+                    </div>
+                </div>
+                            <div class="col-md-4 col-sm-12" style="margin-bottom: 10px;">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">VII</span>
+                        <input type="tel" hash="80" name="VII" value="0" class="gpu form-control amd" style="text-align: right;" placeholder="0">
+                        <span class="input-group-addon" id="basic-addon2">장 X 80Mh/s</span>
+                    </div>
+                </div>
+                            <div class="col-md-4 col-sm-12" style="margin-bottom: 10px;">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">RX6700 XT</span>
+                        <input type="tel" hash="45" name="RX6700 XT" value="0" class="gpu form-control amd" style="text-align: right;" placeholder="0">
+                        <span class="input-group-addon" id="basic-addon2">장 X 45Mh/s</span>
+                    </div>
+                </div>
+                        </div>
+        </div>
+        
+        <button class="btn btn-primary btn-block btn-lg submit" style="margin-bottom: 30px;">계산하기</button>
+    <div class="alert alert-success" role="alert">
+        <p>문제가 있거나 건의사항이 있다면 알려주세요. miningcalc.kr@gmail.com</p><p>
+    </p></div>
+
+
+    <script>
+        $(".submit").click(function(){
+            var hash = $("#total_hash").val();
+            window.location.href = "https://miningcalc.kr/calc/eth/"+hash;
+        });
+
+        $("input").click(function(){
+            $(this).select();
+        });
+
+        $(".gpu").change(function(){
+            var totalhash = 0;
+            $( ".gpu" ).each(function() {
+                var hash =  parseFloat($(this).attr("hash"));
+                var num =  parseFloat($(this).val());
+                // console.log(hash, num, hash*num);
+                totalhash += hash*num;
+                $("#total_hash").val(totalhash);
+            });
+        });
+
+        $("#reset_nvidia").click(function(){
+            $( ".nvidia" ).each(function() {
+                $(this).val(0);
+                var totalhash = 0;
+                $( ".gpu" ).each(function() {
+                    var hash =  parseFloat($(this).attr("hash"));
+                    var num =  parseFloat($(this).val());
+                    // console.log(hash, num, hash*num);
+                    totalhash += hash*num;
+                    $("#total_hash").val(totalhash);
+                });
+            });
+
+        });
+        $("#reset_amd").click(function(){
+            $( ".amd" ).each(function() {
+                $(this).val(0);
+                var totalhash = 0;
+                $( ".gpu" ).each(function() {
+                    var hash =  parseFloat($(this).attr("hash"));
+                    var num =  parseFloat($(this).val());
+                    // console.log(hash, num, hash*num);
+                    totalhash += hash*num;
+                    $("#total_hash").val(totalhash);
+                });
+            });
+        });
+    </script>
+
+    </div> <!-- container -->
+
+    <script language="javascript" type="text/javascript">
+        $(window).load(function() {
+          // $('#loading').hide();
+          $('#loading').modal('hide');
+        });
+    </script>
+	
+  
+ </body></html>

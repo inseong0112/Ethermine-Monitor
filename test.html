@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="dark">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" type="imagex-icon" href="https://i.ibb.co/QcNcJny/Ethereum.png">
+    <title>Ethermine</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet"
+    	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+    	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+    	crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/css/bootstrap-slider.css" />
+	  
+<!----- header -------> 
+	  <script type="text/javascript">
+      function filter(){
+
+        var value, name, item, i;
+
+        value = document.getElementById("value").value.toUpperCase();
+        item = document.getElementsByClassName("item");
+
+        for(i=0;i<item.length;i++){
+          name = item[i].getElementsByClassName("name");
+          if(name[0].innerHTML.toUpperCase().indexOf(value) > -1){
+            item[i].style.display = "flex";
+          }else{
+            item[i].style.display = "none";
+          }
+        }
+      }
+	  </script>  
+	  
+	  <style type="text/css">
+	  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: #24201f;
+}
+ul:after{
+    content:'';
+    display: block;
+    clear:both;
+}
+li {
+    float: left;
+}
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+li a:hover:not(.active) {
+    background-color: #111;
+}
+.active {
+    background-color: #4CAF50;
+}
+		  .footer {
+
+    position: absolute;
+
+    left: 0;
+
+    bottom: 1;
+
+    width: 100%;
+    padding: 15px 0;
+    text-align: center;
+    color: white;
+    background: #24201f;
+}
+
+	  </style>
+<!----- header -------> 
+	  
+	  
+	<style>
+		body{
+			background-color: #262329;
+		}
+    .left {
+        width: 80%;
+        float: left;
+        box-sizing: border-box;
+        
+        background: #262329;
+    }
+    .right {
+        width: 20%;
+        float: right;
+        box-sizing: border-box;
+        
+        background: #ABABAB;
+    }
+    </style>
+
+	  
+	  
+	  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+    function comma(str) {
+        str = String(str);
+        return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+    }
+    function setUpbitData(){
+      $.ajax({
+        url: "https://api.upbit.com/v1/market/all",
+        dataType: "json"
+      }).done(function(markets){
+        //$("#tmp").html( JSON.stringify(markets) );
+		let arr_krw_markets = "";
+        let arr_korean_name = [];
+		let arr_english_name = [];
+        for(var i = 0; i < markets.length;i++){
+          if( markets[i].market.indexOf("KRW") > -1 ){
+            arr_krw_markets += markets[i].market+(",");
+            arr_korean_name.push(markets[i].korean_name.replace("코인",""));
+			arr_english_name.push(markets[i].english_name.replace("Coin", ""));
+          }
+        }
+		  
+		  
+        arr_krw_markets = arr_krw_markets.substring(0, arr_krw_markets.length-1);
+        //$("#tmp").html( arr_krw_markets );
+        $.ajax({
+          url: "https://api.upbit.com/v1/ticker?markets=" +arr_krw_markets,
+          dataType: "json"
+        }).done(function(tickers){
+          $("#table_ticker > tbody > tr").remove();
+          //alert($("#table_ticker > tbody > tr").length);
+          $("#table_ticker").fadeOut("slow");
+          for(let i = 0;i < tickers.length;i++){
+            let rowHtml = "<tr><td>"+arr_english_name[i].replace("코인","").replace("토큰","")+"</td>";
+            rowHtml += "<td>" + arr_korean_name[i] + "코인" + "</td>"
+            rowHtml += "<td>" + comma(tickers[i].trade_price)+"</td>"
+            rowHtml += "<td>" + comma((tickers[i].signed_change_rate*100).toFixed(2))+"</td>"
+            rowHtml += "<td>" + comma((     tickers[i].acc_trade_price_24h>1000000 ? ( tickers[i].acc_trade_price_24h / 1000000 ) : tickers[i].acc_trade_price_24h ).toFixed(0)) + (tickers[i].acc_trade_price_24h>1000000 ? "백만" : "") + "</td>"
+            rowHtml += "</tr>";
+            $("#table_ticker > tbody:last").append(rowHtml);
+            //markets[i].korean_name
+          } // end for...
+
+          $("#table_ticker").fadeIn("slow");
+        })  //done(function(tickers){
+      }) // end done(function(markets){
+      .fail(function(){
+        //alert("업비트 API 접근 중 에러.")}
+        $("#tmp").text( "API 접근 중 에러." );
+      })
+      setTimeout(setUpbitData, 13000);
+    }
+    $(function() {
+      setUpbitData();
+    });
+    </script>
+	  
+	  
+  </head>
+
+  <body>
+	  
+	<ul>
+      <li><a class="active" href="http://ethermine.dothome.co.kr/"> Home </a></li>
+      <li><a href="http://ethermine.dothome.co.kr/calc/calc.html">채산성 계산</a></li>
+      <li><a href="http://ethermine.dothome.co.kr/ethermine.html">잔고조회</a></li>
+    </ul>
+	  
+	  
+	  
+	  
+
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	<table border="1">
+		<div class="left"><img src="https://ethermine.org/img/keyvisual_white.png" style="max-width: 90%; height=auto"></div>
+		<div class="right">
+		<table id="table_ticker" class="table table-hover text-center" bgcolor="#FFFFFF">
+      	<thead bgcolor="#FFFFFF">
+      		<tr bgcolor="#FFFFFF">
+        		<td>ENG</td>
+        		<td>한글명</td>
+        		<td>현재가</td>
+        		<td>전일대비</td>
+        		<td>거래대금</td>
+      		</tr>
+      	</thead>
+      		<tbody bgcolor="#FFFFFF">
+      		</tbody>
+    	</table>
+		
+		</div>
+	</table>
+	
+	  
+
+	  
+  
+	
+	<div class="footer">@Upbit Copyright © 2017 - 2021 Dunamu Inc. All rights reserved.</div>
+
+  </body>
+</html>
